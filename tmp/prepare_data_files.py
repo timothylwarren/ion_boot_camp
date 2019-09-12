@@ -5,6 +5,7 @@ import file_utilities as util
 import pdb
 import pickle
 import filehandling as fh
+import numpy as np
 outfile='alldt.pck'
 data_path='/Volumes/LaCie/2pdata_elife/march28/wt/animal1/'
 dtfiles=['---Streaming Phasor Capture - 1_XY0_Z0_T000_C0.tif','---Streaming Phasor Capture - 2_XY0_Z0_T000_C0.tif','---Streaming Phasor Capture - 5_XY0_Z0_T000_C0.tif','---Streaming Phasor Capture - 6_XY0_Z0_T000_C0.tif']
@@ -29,7 +30,7 @@ for ind,crfile in enumerate(dtfiles):
     meta_dt['frames_to_keep']=frames_to_keep
     list_of_tifstacks.append(sliced_tif)
 outfile = open(data_path+outfile,'wb')
-sumdt['list_of_tifstacks']=list_of_tifstacks
-sumdt['meta_dt']=meta_dt
+sumdt=np.array(list_of_tifstacks)
+#sumdt['meta_dt']=meta_dt
 pickle.dump(sumdt,outfile)
 outfile.close()
